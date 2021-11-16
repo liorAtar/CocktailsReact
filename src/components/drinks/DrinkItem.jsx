@@ -12,15 +12,15 @@ const DrinkItem = ({ name, img }) => {
                 <CardMedia
                     component="img"
                     image={img}
-                    height="200"
+                    height="250"
                     alt="cocktail"
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h6" color="gray" component="div">
-                        {name}
-                    </Typography>
-                </CardContent>
             </CardActionArea>
+            <CardContent>
+                <Typography gutterBottom variant="h6" color="gray">
+                    {name}
+                </Typography>
+            </CardContent>
         </Card>
     )
 }

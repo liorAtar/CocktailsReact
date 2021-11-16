@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 import Tabs from './Tabs';
 import Search from './Search';
 
-const Navbar = () => {
+const Navbar = ({ drinkList, filtereDrinks, cancelSearch, onChangeTab }) => {
     return (
         <AppBar position="static">
             <Toolbar style={{ background: 'white', padding: 0 }} >
@@ -22,10 +22,10 @@ const Navbar = () => {
                     <Grid item xs={12} sm={9} style={{ display: 'flex' }}>
                         <Grid container style={{ justifyContent: 'center' }}>
                             <Grid item sm={8}>
-                                <Tabs />
+                                <Tabs onChangeTab={onChangeTab} />
                             </Grid>
                             <Grid item sm={4} style={{ alignSelf: 'center' }}>
-                                <Search />
+                                <Search filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} drinkList={drinkList} />
                             </Grid>
                         </Grid>
                     </Grid>
