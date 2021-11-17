@@ -6,14 +6,14 @@ const DrinkList = ({ drinkList, handleClickOpen }) => {
 
     return (
         <Grid container style={{ width: '70%', margin: 'auto' }}>
-            {drinkList.map(drink =>
+            {drinkList !== null && drinkList !== undefined && drinkList.map(drink =>
                 <Grid item
                     style={{ justifyContent: 'center', display: 'flex' }}
                     key={drink.idDrink}
                     xs={12} sm={4} md={3}>
                     <DrinkItem
                         key={drink.idDrink}
-                        drink={drink}
+                        currentDrink={drink}
                         handleClickOpen={handleClickOpen}
                     />
                 </Grid>

@@ -2,60 +2,42 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './navbar/Navbar';
 import DrinkList from './drinks/DrinkList';
 import DrinkDialog from './drinks/DrinkDialog';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {
+    GET_GIN_DRINKS,
+    GET_RUM_DRINKS,
+    GET_TEQUILA_DRINKS,
+    GET_VODKA_DRINKS
+} from '../actions/types';
 
-const HomePage = () => {
+import { setDrinksList, setSearchList, setSelectedTabDrinks, getRequestedTabDrinks } from '../actions/drinkAction';
+
+const HomePage = ({ drink: { loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink }, getGinDrinks, getRumDrinks, getTequilaDrinks, getVodkaDrinks, setDrinksList, setSearchList, setSelectedTabDrinks, getRequestedTabDrinks }) => {
 
     const [open, setOpen] = useState(false);
-    const [currentDrink, setCurrentDrink] = useState({
-        drinkDetails: {},
-        recipe: [],
-        instructions: ''
-    });
-
-    const [drinkList, setDrinkList] = useState([]);
-    const [allTabList, setAllTabList] = useState([]);
-    const [ginList, setGinList] = useState([]);
-    const [rumList, setRumList] = useState([]);
-    const [tequilaList, setTequilaList] = useState([]);
-    const [vodkaList, setVodkaList] = useState([]);
 
     useEffect(() => {
-        fetchDrink('rum', setRumList);
-        fetchDrink('tequila', setTequilaList);
-        fetchDrink('vodka', setVodkaList);
-        fetchDrink('gin', setGinList);
-    }, [])
-
-    const fetchDrink = (drink, setList) => {
-        axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drink}`)
-            .then(res => {
-                setList(res.data.drinks);
-                if (drink === 'gin') {
-                    setDrinkList(res.data.drinks);
-                    setAllTabList(res.data.drinks);
-                }
-            })
-    }
+        getRequestedTabDrinks('gin', GET_GIN_DRINKS);
+        getRequestedTabDrinks('rum', GET_RUM_DRINKS);
+        getRequestedTabDrinks('tequila', GET_TEQUILA_DRINKS);
+        getRequestedTabDrinks('vodka', GET_VODKA_DRINKS);
+    }, [getRequestedTabDrinks])
 
     const changeCurrentnTab = (newValue) => {
         if (newValue === 'Gin') {
-            setDrinkList(ginList);
-            setAllTabList(ginList);
+            setSearchList(ginList);
         } else if (newValue === 'Rum') {
-            setDrinkList(rumList);
-            setAllTabList(rumList);
+            setSearchList(rumList);
         } else if (newValue === 'Tequila') {
-            setDrinkList(tequilaList);
-            setAllTabList(tequilaList);
+            setSearchList(tequilaList);
         } else if (newValue === 'Vodka') {
-            setDrinkList(vodkaList);
-            setAllTabList(vodkaList);
+            setSearchList(vodkaList);
         }
     }
 
     const filtereDrinks = searchField => {
-        const filteredList = allTabList.filter(drink => {
+        const filteredList = searchList.filter(drink => {
             return (
                 drink
                     .strDrink
@@ -64,33 +46,45 @@ const HomePage = () => {
             );
         });
 
-        setDrinkList(filteredList);
+        if (filteredList.length === 0) {
+            alert("There is no cocktail by that name", "Search Cocktail Error");
+        } else {
+            setDrinksList(filteredList);
+        }
     }
 
     const cancelSearch = () => {
-        setDrinkList(allTabList);
+        setDrinksList(searchList);
     }
 
-    const handleClickOpen = (drink, recipe, instructions) => {
+    const handleClickOpen = () => {
         setOpen(true);
-        setCurrentDrink({
-            drinkDetails: drink,
-            recipe: recipe,
-            instructions: instructions
-        });
     }
 
     const handleClose = () => {
         setOpen(false);
     };
 
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+
     return (
         <div>
-            <Navbar drinkList={drinkList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
-            <DrinkDialog drink={currentDrink.drinkDetails} recipe={currentDrink.recipe} instructions={currentDrink.instructions} open={open} onClose={handleClose} />
-            <DrinkList drinkList={drinkList} handleClickOpen={handleClickOpen} />
+            <Navbar drinkList={drinksList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
+            {open && <DrinkDialog drink={selectedDrink.drinkInfo} recipe={selectedDrink.recipe} open={open} onClose={handleClose} />
+            }
+            <DrinkList drinkList={drinksList} handleClickOpen={handleClickOpen} />
         </div >
     )
 }
 
-export default HomePage;
+HomePage.propTypes = {
+    drink: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    drink: state.drink
+})
+
+export default connect(mapStateToProps, { setDrinksList, setSearchList, setSelectedTabDrinks, getRequestedTabDrinks })(HomePage);

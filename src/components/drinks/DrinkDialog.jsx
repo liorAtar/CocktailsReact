@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 
-const DrinkDialog = ({ drink, recipe, instructions, open, onClose }) => {
+const DrinkDialog = ({ drink, recipe, open, onClose }) => {
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -22,7 +22,7 @@ const DrinkDialog = ({ drink, recipe, instructions, open, onClose }) => {
                     </Grid>
                 </Grid>
                 <Typography style={{ margin: 10 }} gutterBottom variant="body2" color="black">
-                    {instructions}
+                    {drink.strInstructions}
                 </Typography>
             </DialogContent>
         </Dialog >
