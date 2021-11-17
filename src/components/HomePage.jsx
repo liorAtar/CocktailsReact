@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './navbar/Navbar';
 import DrinkList from './drinks/DrinkList';
+import DrinkDialog from './drinks/DrinkDialog';
 import axios from 'axios';
 
 const HomePage = () => {
+
+    const [open, setOpen] = useState(false);
+    const [currentDrink, setCurrentDrink] = useState({
+        drinkDetails: {},
+        recipe: [],
+        instructions: ''
+    });
 
     const [drinkList, setDrinkList] = useState([]);
     const [allTabList, setAllTabList] = useState([]);
@@ -31,7 +39,6 @@ const HomePage = () => {
     }
 
     const changeCurrentnTab = (newValue) => {
-        console.log(newValue);
         if (newValue === 'Gin') {
             setDrinkList(ginList);
             setAllTabList(ginList);
@@ -64,10 +71,24 @@ const HomePage = () => {
         setDrinkList(allTabList);
     }
 
+    const handleClickOpen = (drink, recipe, instructions) => {
+        setOpen(true);
+        setCurrentDrink({
+            drinkDetails: drink,
+            recipe: recipe,
+            instructions: instructions
+        });
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div>
             <Navbar drinkList={drinkList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
-            <DrinkList drinkList={drinkList} />
+            <DrinkDialog drink={currentDrink.drinkDetails} recipe={currentDrink.recipe} instructions={currentDrink.instructions} open={open} onClose={handleClose} />
+            <DrinkList drinkList={drinkList} handleClickOpen={handleClickOpen} />
         </div >
     )
 }
