@@ -2,10 +2,10 @@ import React from 'react';
 import DrinkItem from './DrinkItem';
 import { Grid } from '@material-ui/core';
 
-const DrinkList = ({ drinkList, handleClickOpen }) => {
+const DrinkList = ({ drinkList, openDrinkInfo }) => {
 
     return (
-        <Grid container style={{ width: '70%', margin: 'auto' }}>
+        <Grid container style={{ width: '70%', margin: '2rem auto' }}>
             {drinkList !== null && drinkList !== undefined && drinkList.map(drink =>
                 <Grid item
                     style={{ justifyContent: 'center', display: 'flex' }}
@@ -14,7 +14,7 @@ const DrinkList = ({ drinkList, handleClickOpen }) => {
                     <DrinkItem
                         key={drink.idDrink}
                         currentDrink={drink}
-                        handleClickOpen={handleClickOpen}
+                        openDrinkInfo={openDrinkInfo}
                     />
                 </Grid>
             )}

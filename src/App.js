@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import './App.css';
-import HomePage from './components/HomePage';
+import MainPage from './components/pages/MainPage';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -8,7 +7,7 @@ function App() {
   return (
     <Provider store={store}>
       <Fragment>
-        <HomePage />
+        <MainPage style={{ display: 'contents' }} />
       </Fragment>
     </Provider>
   );
