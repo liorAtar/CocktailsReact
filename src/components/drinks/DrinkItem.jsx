@@ -4,17 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-
 import { setSelectedDrink } from '../../actions/drinkAction';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const DrinkItem = ({ currentDrink, handleClickOpen, setSelectedDrink }) => {
+const DrinkItem = ({ currentDrink, openDrinkInfo, setSelectedDrink }) => {
 
     const callBackMethod = async () => {
         try {
             await setSelectedDrink(currentDrink.strDrink);
-            handleClickOpen();
+            openDrinkInfo();
         } catch (err) {
             console.log(err);
         }
@@ -22,7 +21,7 @@ const DrinkItem = ({ currentDrink, handleClickOpen, setSelectedDrink }) => {
     }
 
     return (
-        <Card sx={{ maxWidth: 170, maxHeight: 260, margin: 1 }}>
+        <Card style={{ boxShadow: '0px 0px 0px', borderRadius: '0px', backgroundColor: 'transparent' }} sx={{ maxWidth: 170, maxHeight: 260, margin: 1 }}>
             <CardActionArea onClick={callBackMethod}>
                 <CardMedia
                     component="img"

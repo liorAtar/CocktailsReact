@@ -19,7 +19,7 @@ const intialState = {
     rumList: null,
     tequilaList: null,
     vodkaList: null,
-    selectedTab: GET_GIN_DRINKS,
+    selectedTab: true,
     selectedDrink: {
         drinkInfo: null,
         recipe: null
@@ -33,7 +33,7 @@ const Action = (state = intialState, action) => {
         case SET_SELECTED_TAB:
             return {
                 ...state,
-                selectedTab: action.payload,
+                selectedTab: true,
                 loading: false
             }
         case UPDATE_CURRENT_DRINKS_LIST:
@@ -46,6 +46,7 @@ const Action = (state = intialState, action) => {
             return {
                 ...state,
                 searchList: action.payload,
+                selectedTab: false,
                 loading: false
             }
         case GET_GIN_DRINKS:

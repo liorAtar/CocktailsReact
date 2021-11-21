@@ -43,20 +43,6 @@ export const setSearchList = (serachList) => dispatch => {
     }
 };
 
-export const setSelectedTabDrinks = (tabName) => async dispatch => {
-    try {
-        dispatch({
-            type: SET_SELECTED_TAB,
-            payload: tabName
-        });
-    } catch (err) {
-        dispatch({
-            type: GET_DRINKS_ERROR,
-            payload: err
-        })
-    }
-};
-
 // Get drinks from api by selected tab
 export const getRequestedTabDrinks = (tabName, type) => async dispatch => {
     try {
@@ -127,5 +113,11 @@ export const setSelectedDrink = (name) => async dispatch => {
 export const setLoading = () => {
     return {
         type: SET_LOADING
+    };
+};
+
+export const setLogoClicked = () => {
+    return {
+        type: SET_SELECTED_TAB
     };
 };
