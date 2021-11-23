@@ -19,25 +19,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export const signup = (email, password) => {
+export function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
 }
-
-// export const registerWithEmailAndPassword = async (name, email, password) => {
-//     try {
-//         const res = await createUserWithEmailAndPassword(auth, email, password);
-//         const user = res.user;
-//         await db.collection("users").add({
-//             uid: user.uid,
-//             name,
-//             authProvider: "local",
-//             email,
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         alert(err.message);
-//     }
-// };
 
 export const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
