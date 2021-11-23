@@ -12,7 +12,8 @@ import {
     GET_TEQUILA_DRINKS,
     GET_VODKA_DRINKS
 } from '../../actions/types';
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SignUp from './SignUp';
 import { setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks } from '../../actions/drinkAction';
 
 const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink }, setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks }) => {
@@ -70,16 +71,21 @@ const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList
     };
 
     return (
-        <div>
-            <Navbar drinkList={drinksList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
-            {loading && !selectedTab && <Loading loading={loading} />}
-            {open && <DrinkDialog drink={selectedDrink.drinkInfo} recipe={selectedDrink.recipe} open={open} onClose={closeDrinkInfo} />
-            }
-            {selectedTab && <Home />}
-            {!loading && !selectedTab && <DrinkList drinkList={drinksList} openDrinkInfo={openDrinkInfo} />}
-        </div >
+        <Router>
+            <div>
+                <Route exact path="/">
+                    <Navbar drinkList={drinksList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
+                    {loading && !selectedTab && <Loading loading={loading} />}
+                    {open && <DrinkDialog drink={selectedDrink.drinkInfo} recipe={selectedDrink.recipe} open={open} onClose={closeDrinkInfo} />
+                    }
+                    {selectedTab && <Home />}
+                    {!loading && !selectedTab && <DrinkList drinkList={drinksList} openDrinkInfo={openDrinkInfo} />}
+                </Route>
+                <Route exact path="/signup" component={SignUp}>
+                </Route>
+            </div >
+        </Router>
     )
-
 }
 
 

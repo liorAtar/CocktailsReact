@@ -5,7 +5,7 @@ import {
     SET_SELECTED_DRINK,
     SET_SELECTED_DRINK_ERROR,
     SET_LOADING,
-    SET_SELECTED_TAB
+    SET_SELECTED_TAB,
 } from './types';
 import axios from 'axios';
 
