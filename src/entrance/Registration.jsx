@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import Button from '@mui/material/Button';
-import { signup, login, logout, useAuth } from '../../firebase';
+import { useAuth } from '../../firebase';
 
 const Registration = () => {
     const emailRef = useRef();

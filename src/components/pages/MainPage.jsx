@@ -4,6 +4,8 @@ import DrinkList from '../drinks/DrinkList';
 import DrinkDialog from '../drinks/DrinkDialog';
 import Loading from './Loading';
 import Home from './Home';
+import SignUp from './SignUp';
+import LogIn from './LogIn';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -12,8 +14,7 @@ import {
     GET_TEQUILA_DRINKS,
     GET_VODKA_DRINKS
 } from '../../actions/types';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SignUp from './SignUp';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks } from '../../actions/drinkAction';
 
 const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink }, setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks }) => {
@@ -81,8 +82,8 @@ const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList
                     {selectedTab && <Home />}
                     {!loading && !selectedTab && <DrinkList drinkList={drinksList} openDrinkInfo={openDrinkInfo} />}
                 </Route>
-                <Route exact path="/signup" component={SignUp}>
-                </Route>
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/login" component={LogIn} />
             </div >
         </Router>
     )
