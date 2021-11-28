@@ -1,18 +1,17 @@
 import {
     SET_LOADING,
     UPDATE_CURRENT_USER,
-    UPDATE_CURRENT_USER_ERROR,
-    SIGN_UP,
-    SIGN_UP_ERROR
+    UPDATE_CURRENT_USER_ERROR
 } from '../actions/types';
 
 const intialState = {
     currentUser: null,
     loadingUser: false,
+    isLoggedIn: false,
     error: null
 };
 
-const Action = (state = intialState, action) => {
+const UserAction = (state = intialState, action) => {
     switch (action.type) {
         case UPDATE_CURRENT_USER:
             return {
@@ -26,19 +25,6 @@ const Action = (state = intialState, action) => {
                 loadingUser: false,
                 error: action.payload
             }
-        case SIGN_UP:
-            console.log('signed up')
-            return {
-                ...state,
-                loadingUser: false
-            }
-        case SIGN_UP_ERROR:
-            console.log(action.payload);
-            return {
-                ...state,
-                loadingUser: false,
-                error: action.payload
-            };
         case SET_LOADING:
             return {
                 ...state,
@@ -49,4 +35,4 @@ const Action = (state = intialState, action) => {
     }
 };
 
-export default Action;
+export default UserAction;

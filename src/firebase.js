@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,26 +18,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password)
+export const signup = async (email, password, firstName) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+    updateProfile(auth.currentUser, {
+        displayName: firstName
+    })
 }
 
-export const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+export const login = async (email, password) => {
+    // TODO: error handling
+    const userC = await signInWithEmailAndPassword(auth, email, password);
+    return userC;
 }
 
 export const logout = () => {
     return signOut(auth);
-}
-
-// Costum Hook
-export const useAuth = () => {
-    const [currentUser, setCurrentUser] = useState();
-
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, user => { setCurrentUser(user) });
-        return unsub;
-    }, [])
-
-    return currentUser;
 }

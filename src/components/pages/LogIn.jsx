@@ -1,20 +1,32 @@
 import React from 'react';
+import EnterInfo from './EnterInfo';
 import { login } from '../../firebase';
-import EnterInfo from './sections/EnterInfo';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { updateCurrentUser } from '../../actions/userAction';
 
-const LogIn = () => {
+const LogIn = ({ user: { loadingUser }, updateCurrentUser }) => {
 
     const handleLogIn = async (emailRef, passwordRef) => {
         try {
-            await login(emailRef.current.value, passwordRef.current.value);
+            const userCredential = await login(emailRef.current.value, passwordRef.current.value);
+            await updateCurrentUser(userCredential.user);
         } catch (err) {
             alert(err.message);
         }
     }
 
     return (
-        <EnterInfo action="Log In" handleAction={handleLogIn} />
+        <EnterInfo action="Log In" href='/' handleAction={handleLogIn} />
     )
 }
 
-export default LogIn;
+LogIn.propTypes = {
+    user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+export default connect(mapStateToProps, { updateCurrentUser })(LogIn);

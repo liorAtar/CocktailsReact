@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
 import MainPage from './components/pages/MainPage';
 import { Provider } from 'react-redux';
-import store from './store';
+import configureStore from './store'
+import { PersistGate } from 'redux-persist/integration/react'
+
+const { persistor, store } = configureStore()
 
 function App() {
   return (
     <Provider store={store}>
-      <Fragment>
-        <MainPage style={{ display: 'contents' }} />
-      </Fragment>
+      <PersistGate loading={null} persistor={persistor}>
+        <Fragment>
+          <MainPage style={{ display: 'contents' }} />
+        </Fragment>
+      </PersistGate>
     </Provider>
   );
 }

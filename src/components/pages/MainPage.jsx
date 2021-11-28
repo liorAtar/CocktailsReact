@@ -17,7 +17,9 @@ import {
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks } from '../../actions/drinkAction';
 
-const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink }, setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks }) => {
+const MainPage = ({
+    drink: { selectedTab, loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink },
+    setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks }) => {
 
     const [open, setOpen] = useState(false);
 
@@ -29,6 +31,7 @@ const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList
     }, [getRequestedTabDrinks])
 
     const changeCurrentnTab = (newValue) => {
+        // TODO: switch case
         if (newValue === 'Home') {
             setLogoClicked();
         } else if (newValue === 'Gin') {
@@ -91,11 +94,11 @@ const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList
 
 
 MainPage.propTypes = {
-    drink: PropTypes.object.isRequired
+    drink: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    drink: state.drink
+    drink: state.drink,
 })
 
 export default connect(mapStateToProps, { setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks })(MainPage);

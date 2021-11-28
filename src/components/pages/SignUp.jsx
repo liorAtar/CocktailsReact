@@ -1,19 +1,19 @@
 import React from 'react';
 import { signup } from '../../firebase';
-import EnterInfo from './sections/EnterInfo';
+import EnterInfo from './EnterInfo';
 
 const SignUp = () => {
 
-    const handleSignUp = async (emailRef, passwordRef) => {
+    const handleSignUp = async (emailRef, passwordRef, firstNameRef) => {
         try {
-            await signup(emailRef.current.value, passwordRef.current.value);
+            await signup(emailRef.current.value, passwordRef.current.value, firstNameRef.current.value);
         } catch (err) {
             alert(err.message);
         }
     }
 
     return (
-        <EnterInfo action="Sign Up" handleAction={handleSignUp} />
+        <EnterInfo action="Sign Up" href='/login' handleAction={handleSignUp} />
     )
 }
 
