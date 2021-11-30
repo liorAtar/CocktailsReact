@@ -16,7 +16,6 @@ const articleBtnStyle = {
 
 const COCKTAIL_IMG = "https://twolovesstudio.com/wp-content/uploads/2021/06/Tempo-Arandano_Cocktails_Blueberry-Gin_May-2021_29770-Blog-726x1088.jpg";
 const SIGN_UP_ACTION = "Sign Up";
-const LOG_IN_ACTION = "Log In";
 
 const EnterInfo = ({ user: { loadingUser }, action, handleAction, href }) => {
     const emailRef = useRef();

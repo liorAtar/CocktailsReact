@@ -1,7 +1,8 @@
 import {
     SET_LOADING,
     UPDATE_CURRENT_USER,
-    UPDATE_CURRENT_USER_ERROR
+    UPDATE_CURRENT_USER_ERROR,
+    SET_LOGGED_IN
 } from '../actions/types';
 
 const intialState = {
@@ -24,6 +25,11 @@ const UserAction = (state = intialState, action) => {
                 ...state,
                 loadingUser: false,
                 error: action.payload
+            }
+        case SET_LOGGED_IN:
+            return {
+                ...state,
+                isLoggedIn: action.payload
             }
         case SET_LOADING:
             return {

@@ -111,6 +111,7 @@ export const setSelectedDrink = (name) => async dispatch => {
 
 // Set loading to true
 export const setLoading = () => {
+    console.log("entered")
     return {
         type: SET_LOADING
     };
