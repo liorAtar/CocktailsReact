@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -7,11 +7,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Grid } from '@material-ui/core';
 import Tabs from './Tabs';
 import Search from './Search';
-import { purple } from '@mui/material/colors';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../firebase';
 import { setLoggedIn, updateCurrentUser } from '../../actions/userAction';
+
+const articleBtnStyle = {
+    height: '40px',
+};
 
 const Navbar = ({
     user: { currentUser, isLoggedIn },

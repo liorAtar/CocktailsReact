@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -17,7 +17,7 @@ const DrinkDialog = ({ user: { isLoggedIn }, drink, recipe, open, onClose }) => 
             </DialogTitle>
             <DialogContent >
                 <Grid container style={{ justifyContent: 'center', display: 'flex' }}>
-                    <Grid item >
+                    <Grid item>
                         <img style={{ height: 150, margin: 10 }} src={drink.strDrinkThumb} alt={drink.strDrink} />
                     </Grid>
                     {!isLoggedIn &&
