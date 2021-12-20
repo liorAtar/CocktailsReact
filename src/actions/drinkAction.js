@@ -5,7 +5,7 @@ import {
     SET_SELECTED_DRINK,
     SET_SELECTED_DRINK_ERROR,
     SET_LOADING,
-    SET_SELECTED_TAB
+    SET_SELECTED_TAB,
 } from './types';
 import axios from 'axios';
 
@@ -111,6 +111,7 @@ export const setSelectedDrink = (name) => async dispatch => {
 
 // Set loading to true
 export const setLoading = () => {
+    console.log("entered")
     return {
         type: SET_LOADING
     };

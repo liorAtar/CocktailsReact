@@ -12,16 +12,14 @@ const Tabs = ({ onChangeTab }) => {
     };
 
     return (
-        <div>
-            <TabsContainer style={{ color: 'white', justifyContent: 'center', display: 'grid' }} textColor="inherit" indicatorColor="secondary"
-                onChange={handleChange} value={selectedTab} aria-label="basic tabs example">
-                <Tab value="Home" label="Home" style={{ minWidth: 0, padding: 8 }} />
-                <Tab value="Gin" label="Gin" style={{ minWidth: 0, padding: 8 }} />
-                <Tab value="Rum" label="Rum" style={{ minWidth: 0, padding: 8 }} />
-                <Tab value="Tequila" label="Tequila" style={{ minWidth: 0, padding: 8 }} />
-                <Tab value="Vodka" label="Vodka" style={{ minWidth: 0, padding: 8 }} />
-            </TabsContainer>
-        </div >
+        <TabsContainer style={{ color: 'white', justifyContent: 'center', display: 'grid' }} textColor="inherit" indicatorColor="secondary"
+            onChange={handleChange} value={selectedTab} aria-label="basic tabs example">
+            <Tab value="Home" label="Home" style={{ minWidth: 0, paddingRight: 8, paddingLeft: 8 }} />
+            <Tab value="Gin" label="Gin" style={{ minWidth: 0, paddingRight: 8, paddingLeft: 8 }} />
+            <Tab value="Rum" label="Rum" style={{ minWidth: 0, paddingRight: 8, paddingLeft: 8 }} />
+            <Tab value="Tequila" label="Tequila" style={{ minWidth: 0, paddingRight: 8, paddingLeft: 8 }} />
+            <Tab value="Vodka" label="Vodka" style={{ minWidth: 0, paddingRight: 8, paddingLeft: 8 }} />
+        </TabsContainer>
     )
 }
 

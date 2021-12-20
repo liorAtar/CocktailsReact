@@ -4,6 +4,8 @@ import DrinkList from '../drinks/DrinkList';
 import DrinkDialog from '../drinks/DrinkDialog';
 import Loading from './Loading';
 import Home from './Home';
+import SignUp from './SignUp';
+import LogIn from './LogIn';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -12,10 +14,12 @@ import {
     GET_TEQUILA_DRINKS,
     GET_VODKA_DRINKS
 } from '../../actions/types';
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks } from '../../actions/drinkAction';
 
-const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink }, setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks }) => {
+const MainPage = ({
+    drink: { selectedTab, loading, ginList, rumList, tequilaList, vodkaList, drinksList, searchList, selectedDrink },
+    setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks }) => {
 
     const [open, setOpen] = useState(false);
 
@@ -27,6 +31,7 @@ const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList
     }, [getRequestedTabDrinks])
 
     const changeCurrentnTab = (newValue) => {
+        // TODO: switch case
         if (newValue === 'Home') {
             setLogoClicked();
         } else if (newValue === 'Gin') {
@@ -70,25 +75,30 @@ const MainPage = ({ drink: { selectedTab, loading, ginList, rumList, tequilaList
     };
 
     return (
-        <div>
-            <Navbar drinkList={drinksList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
-            {loading && !selectedTab && <Loading loading={loading} />}
-            {open && <DrinkDialog drink={selectedDrink.drinkInfo} recipe={selectedDrink.recipe} open={open} onClose={closeDrinkInfo} />
-            }
-            {selectedTab && <Home />}
-            {!loading && !selectedTab && <DrinkList drinkList={drinksList} openDrinkInfo={openDrinkInfo} />}
-        </div >
+        <Router>
+            <div>
+                <Route exact path="/">
+                    <Navbar drinkList={drinksList} filtereDrinks={filtereDrinks} cancelSearch={cancelSearch} onChangeTab={changeCurrentnTab} />
+                    {loading && !selectedTab && <Loading loading={loading} />}
+                    {open && <DrinkDialog drink={selectedDrink.drinkInfo} recipe={selectedDrink.recipe} open={open} onClose={closeDrinkInfo} />
+                    }
+                    {selectedTab && <Home />}
+                    {!loading && !selectedTab && <DrinkList drinkList={drinksList} openDrinkInfo={openDrinkInfo} />}
+                </Route>
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/login" component={LogIn} />
+            </div >
+        </Router>
     )
-
 }
 
 
 MainPage.propTypes = {
-    drink: PropTypes.object.isRequired
+    drink: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    drink: state.drink
+    drink: state.drink,
 })
 
 export default connect(mapStateToProps, { setDrinksList, setSearchList, setLogoClicked, getRequestedTabDrinks })(MainPage);

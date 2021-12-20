@@ -9,7 +9,7 @@ import {
     SET_SELECTED_DRINK,
     SET_SELECTED_DRINK_ERROR,
     SET_LOADING,
-    SET_SELECTED_TAB
+    SET_SELECTED_TAB,
 } from '../actions/types';
 
 const intialState = {
@@ -90,12 +90,14 @@ const Action = (state = intialState, action) => {
             console.error(action.payload);
             return {
                 ...state,
+                loading: false,
                 error: action.payload
             };
         case SET_SELECTED_DRINK_ERROR:
             console.error(action.payload);
             return {
                 ...state,
+                loading: false,
                 error: action.payload
             };
         default:
