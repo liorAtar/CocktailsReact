@@ -7,7 +7,7 @@ import {
 
 // Update the current user
 export const updateCurrentUser = (user) => dispatch => {
-    // dispatch(setLoadingUser());
+    dispatch(setLoadingUser());
 
     try {
         dispatch({

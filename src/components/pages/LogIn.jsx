@@ -12,6 +12,9 @@ const LogIn = ({ user: { loadingUser }, updateCurrentUser, setLoggedIn }) => {
             const userCredential = await login(emailRef.current.value, passwordRef.current.value);
             await updateCurrentUser(userCredential.user);
             setLoggedIn(true);
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 1000);
         } catch (err) {
             alert(err.message);
         }
